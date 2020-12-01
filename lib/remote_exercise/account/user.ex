@@ -2,6 +2,8 @@ defmodule RemoteExercise.Account.User do
   use Ecto.Schema
   import Ecto.Changeset
 
+  @derive {Jason.Encoder, only: [:id, :point]}
+
   schema "users" do
     field :point, :integer
 

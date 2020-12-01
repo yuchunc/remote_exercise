@@ -13,4 +13,11 @@ defmodule RemoteExercise.AccountTest do
       assert %{point: 1} = Repo.get(User, user.id)
     end
   end
+
+  describe "query_users/2" do
+    test "get users by the limit" do
+      Account.update_point(99)
+      assert [_, _] = Account.query_users(50, %{limit: 2})
+    end
+  end
 end

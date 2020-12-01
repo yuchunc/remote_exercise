@@ -1,6 +1,8 @@
 defmodule RemoteExercise.Account do
   use GenServer
 
+  import Ecto.Query
+
   alias RemoteExercise.Repo
   alias RemoteExercise.Account
   alias Account.User
@@ -19,6 +21,13 @@ defmodule RemoteExercise.Account do
 
   def update_point(point) do
     Repo.update_all(User, set: [point: point])
+  end
+
+  def query_users(max, %{limit: limit}) do
+    User
+    |> where([u], u.point > ^max)
+    |> limit(^limit)
+    |> Repo.all()
   end
 
   @impl true

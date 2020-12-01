@@ -23,7 +23,11 @@ defmodule RemoteExercise.Account do
     Repo.update_all(User, set: [point: point])
   end
 
-  def query_users(max, %{limit: limit}) do
+  def query_users() do
+    GenServer.call(__MODULE__, :query_users)
+  end
+
+  def do_query_users(max, %{limit: limit}) do
     User
     |> where([u], u.point > ^max)
     |> limit(^limit)
@@ -47,7 +51,7 @@ defmodule RemoteExercise.Account do
   @impl true
   def handle_call(:query_users, _from, state) do
     %{max_number: max, last_query_at: last_query_at} = state
-    users = query_users(max, %{limit: 2})
+    users = do_query_users(max, %{limit: 2})
     {:reply, {users, last_query_at}, %{state | last_query_at: NaiveDateTime.utc_now()}}
   end
 

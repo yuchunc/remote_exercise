@@ -12,9 +12,11 @@
 
 alias RemoteExercise.{Repo, Account}
 
-now = NaiveDateTime.utc_now |> NaiveDateTime.truncate(:second)
-users = for _ <- 1..100 do
-  %{point: 0, inserted_at: now, updated_at: now}
-end
-Repo.insert_all(Account.User, users)
+now = NaiveDateTime.utc_now() |> NaiveDateTime.truncate(:second)
 
+users =
+  for _ <- 1..100 do
+    %{point: 0, inserted_at: now, updated_at: now}
+  end
+
+Repo.insert_all(Account.User, users)

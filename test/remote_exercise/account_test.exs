@@ -6,7 +6,7 @@ defmodule RemoteExercise.AccountTest do
 
   describe "update_point/1" do
     test "updates all user in db with given point" do
-      user = Repo.all(User) |> Enum.random
+      user = Repo.all(User) |> Enum.random()
 
       Account.update_point(1)
 

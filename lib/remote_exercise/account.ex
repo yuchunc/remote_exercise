@@ -44,6 +44,13 @@ defmodule RemoteExercise.Account do
     {:noreply, %{state | max_number: gen_number()}}
   end
 
+  @impl true
+  def handle_call(:query_users, _from, state) do
+    %{max_number: max, last_query_at: last_query_at} = state
+    users = query_users(max, %{limit: 2})
+    {:reply, {users, last_query_at}, %{state | last_query_at: NaiveDateTime.utc_now()}}
+  end
+
   defp gen_number do
     Enum.random(0..100)
   end

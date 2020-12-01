@@ -5,6 +5,7 @@ defmodule RemoteExercise.Account do
   alias RemoteExercise.Account
   alias Account.User
 
+  # 1 min
   @interval 60 * 1000
 
   def start_link(_) do
@@ -30,6 +31,7 @@ defmodule RemoteExercise.Account do
   def handle_info(:update_point, state) do
     %{max_number: point} = state
     update_point(point)
+    Process.send_after(self(), :update_point, @interval)
     {:noreply, %{state | max_number: gen_number()}}
   end
 

@@ -19,8 +19,16 @@ defmodule RemoteExercise.Account do
     GenServer.start_link(__MODULE__, state, name: __MODULE__)
   end
 
-  def update_point(point) do
-    Repo.update_all(User, set: [point: point])
+  def update_point() do
+    Repo.transaction(fn repo ->
+      User
+      |> repo.all
+      |> Enum.map(&
+        &1
+        |> User.changeset(%{point: gen_number()})
+        |> repo.update
+      )
+    end)
   end
 
   def query_users() do
@@ -42,8 +50,7 @@ defmodule RemoteExercise.Account do
 
   @impl true
   def handle_info(:update_point, state) do
-    %{max_number: point} = state
-    update_point(point)
+    update_point()
     Process.send_after(self(), :update_point, @interval)
     {:noreply, %{state | max_number: gen_number()}}
   end

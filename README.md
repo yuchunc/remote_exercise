@@ -1,19 +1,23 @@
-# RandGen
+# RemoteExercise
 
-To start your Phoenix server:
+## Prerequisit
 
-  * Install dependencies with `mix deps.get`
-  * Create and migrate your database with `mix ecto.setup`
-  * Start Phoenix endpoint with `mix phx.server`
+Make sure you have the following installed on your machine:
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+* Postgres
+* asdf
 
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
+## Setup
 
-## Learn more
+1. Clone the project `git clone git@github.com:yuchunc/remote_exercise.git`
+2. `cd` into project directory
+3. run `asdf install` to install Erlang and Elixir
+4. run `mix deps.get` to install required dependencies
+5. run `mix ecto.setup` to create development db, run migrations, and insert seed data
 
-  * Official website: https://www.phoenixframework.org/
-  * Guides: https://hexdocs.pm/phoenix/overview.html
-  * Docs: https://hexdocs.pm/phoenix
-  * Forum: https://elixirforum.com/c/phoenix-forum
-  * Source: https://github.com/phoenixframework/phoenix
+> If you want to recreate the DB environment, run: `mix ecto.reset`
+
+## Running Server
+
+In terminal, run `mix phx.server`.
+Now you should get be getting response from `http://localhost:4000/`.

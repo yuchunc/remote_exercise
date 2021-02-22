@@ -1,6 +1,5 @@
 defmodule RandGen.Account.User do
-  use Ecto.Schema
-  import Ecto.Changeset
+  use RandGen, :schema
 
   schema "users" do
     field :points, :integer

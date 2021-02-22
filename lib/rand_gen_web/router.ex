@@ -5,7 +5,9 @@ defmodule RandGenWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/api", RandGenWeb do
+  scope "/", RandGenWeb do
     pipe_through :api
+
+    get "/", UserController, :show
   end
 end

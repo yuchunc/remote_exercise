@@ -38,8 +38,9 @@ defmodule RandGen.Randomizer do
     %{max_number: max, last_query_at: last_query_at} = state
 
     users = Account.get_users_by_max(max, limit: 2)
+    new_state = %{state | last_query_at: NaiveDateTime.utc_now()}
 
-    {:reply, {users, last_query_at}, %{state | last_query_at: NaiveDateTime.utc_now()}}
+    {:reply, {users, last_query_at}, new_state}
   end
 
   defp update_points() do

@@ -14,9 +14,10 @@ defmodule RandGen.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: RandGen.PubSub},
       # Start the Endpoint (http/https)
-      RandGenWeb.Endpoint
+      RandGenWeb.Endpoint,
       # Start a worker by calling: RandGen.Worker.start_link(arg)
       # {RandGen.Worker, arg}
+      RandGen.Randomizer
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

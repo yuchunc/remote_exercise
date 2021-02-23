@@ -23,6 +23,8 @@ defmodule RandGenWeb.ConnCase do
       import Plug.Conn
       import Phoenix.ConnTest
       import RandGenWeb.ConnCase
+      import RandGen.Factory
+      import RandGenWeb.TestUtils
 
       alias RandGenWeb.Router.Helpers, as: Routes
 

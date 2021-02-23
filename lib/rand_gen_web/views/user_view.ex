@@ -3,21 +3,20 @@ defmodule RandGenWeb.UserView do
 
   def render("show.json", assigns) do
     %{
-      users: cast_users(assigns.users),
-      timestamp: cast_timestamp(assigns.last_call_timestamp)
+      users: Enum.map(assigns.users, &cast_user_json(&1)),
+      timestamp: cast_timestamp(assigns[:last_call_timestamp])
     }
-    |> Jason.encode!(assigns)
   end
 
-  def cast_users(users) do
-    Enum.map(users, &%{id: &1.id, points: &1.points})
+  defp cast_user_json(user) do
+    %{id: user.id, points: user.points}
   end
 
-  def cast_timestamp(nil) do
+  defp cast_timestamp(nil) do
     nil
   end
 
-  def cast_timestamp(ts) do
+  defp cast_timestamp(ts) do
     Calendar.strftime(ts, "%c")
   end
 end

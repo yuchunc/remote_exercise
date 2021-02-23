@@ -24,6 +24,7 @@ defmodule RandGen.DataCase do
       import Ecto.Changeset
       import Ecto.Query
       import RandGen.DataCase
+      import RandGen.Factory
     end
   end
 

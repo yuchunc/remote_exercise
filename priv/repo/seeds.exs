@@ -12,11 +12,13 @@
 
 alias RandGen.{Repo, Account}
 
-now = NaiveDateTime.utc_now() |> NaiveDateTime.truncate(:second)
+unless Mix.env() == :test do
+  now = NaiveDateTime.utc_now() |> NaiveDateTime.truncate(:second)
 
-users =
-  for _ <- 1..100 do
-    %{points: 0, inserted_at: now, updated_at: now}
-  end
+  users =
+    for _ <- 1..100 do
+      %{points: 0, inserted_at: now, updated_at: now}
+    end
 
-Repo.insert_all(Account.User, users)
+  Repo.insert_all(Account.User, users)
+end

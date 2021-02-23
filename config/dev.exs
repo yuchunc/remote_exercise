@@ -22,6 +22,8 @@ config :rand_gen, RandGenWeb.Endpoint,
   check_origin: false,
   watchers: []
 
+config :mix_test_watch,
+  clear: true
 # ## SSL Support
 #
 # In order to use HTTPS in development, a self-signed

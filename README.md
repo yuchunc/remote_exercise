@@ -20,4 +20,10 @@ Make sure you have the following installed on your machine:
 ## Running Server
 
 In terminal, run `mix phx.server`.
-Now you should get be getting response from `http://localhost:4000/`.
+Now you should be getting response from `http://localhost:4000/`.
+
+## Running Test
+
+1. assuming you have gone through all of [Setup Section](#setup)
+2. run `MIX_ENV=test mix ecto.reset`
+3. run `mix test.watch`

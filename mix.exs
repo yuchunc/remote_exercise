@@ -33,6 +33,7 @@ defmodule RandGen.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      # Phoenix Generated
       {:phoenix, "~> 1.5.7"},
       {:phoenix_ecto, "~> 4.1"},
       {:ecto_sql, "~> 3.4"},
@@ -42,6 +43,9 @@ defmodule RandGen.MixProject do
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
+
+      # Testing
+      {:ex_machina, "~> 2.6.0", only: :test},
       {:mix_test_watch, "~> 1.0", only: :dev, runtime: false}
     ]
   end

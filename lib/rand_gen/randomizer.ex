@@ -20,7 +20,9 @@ defmodule RandGen.Randomizer do
 
   @impl true
   def init(state) do
-    send(self(), :update_points)
+    unless Mix.env() == :test do
+      send(self(), :update_points)
+    end
 
     {:ok, state}
   end
@@ -28,7 +30,10 @@ defmodule RandGen.Randomizer do
   @impl true
   def handle_info(:update_points, state) do
     update_points()
-    Process.send_after(self(), :update_points, @interval)
+
+    unless Mix.env() == :test do
+      Process.send_after(self(), :update_points, @interval)
+    end
 
     {:noreply, %{state | max_number: rand_number()}}
   end
